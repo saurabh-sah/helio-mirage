@@ -1,4 +1,5 @@
 # Project Helio-Mirage: Inter IIT Tech Meet 15.0 CV Prepathon
+*An end-to-end framework for topologically-aware solar filament segmentation and contrastive mitigation of VLM object hallucinations.*
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg)](https://pytorch.org/)

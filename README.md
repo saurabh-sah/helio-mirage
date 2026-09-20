@@ -1,11 +1,10 @@
-# Project Helio-Mirage: Inter IIT Tech Meet 15.0 CV Prepathon
-*An end-to-end framework for topologically-aware solar filament segmentation and contrastive mitigation of VLM object hallucinations.*
+# Project Helio-Mirage: Mapping Solar Topologies. Mitigating AI Hallucinations
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg)](https://pytorch.org/)
 [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/)
 
-This repository contains the comprehensive, end-to-end engineered solution for the SNTC IIT(BHU) Computer Vision Prepathon.
+*An end-to-end framework for topologically-aware solar filament segmentation and contrastive mitigation of VLM object hallucinations.*
 
 ## The Problem Statement
 - **Task A (Solar Physics):** Automated topological segmentation of Solar Filaments (and their delicate barb structures) in full-disk H$\alpha$ solar images.
@@ -20,14 +19,15 @@ A highly detailed academic deep-dive explaining the exact mathematical formulati
 The project has been architected for strict modularity, separating data orchestration, loss formulations, network topologies, and inference logic.
 
 ```text
-prepathon-cv/
+helio-mirage/
 ├── README.md                    # You are here!
-├── report.tex                   # Comprehensive LaTeX Technical Report
-├── colab_runner.ipynb           # Main execution orchestrator for Google Colab
+├── report.pdf                   # Comprehensive Technical Report (Compiled)
+├── notebook.ipynb               # Main execution orchestrator for Google Colab
 ├── requirements.txt             # Pip dependencies
 ├── lora_config.yaml             # PEFT configurations
 ├── src/
 │   ├── task_a/                  # Task A: Filament Segmentation
+│   │   ├── preprocessing/       # Solar disk detection, CLAHE, and limb correction
 │   │   ├── scripts/
 │   │   │   └── prepare_magfilo.py # Parses COCO JSON and rasterizes masks/spines
 │   │   ├── datasets/            # `MAGFiLODataset` (Patch-based Dataloader)
@@ -49,11 +49,11 @@ prepathon-cv/
 Due to local VRAM limitations, the entire pipeline is designed to execute seamlessly on **Google Colab** (T4/A100 GPUs). 
 
 ### 1. Drive Setup
-1. Upload this entire `prepathon-cv` repository to the root of your Google Drive (`MyDrive/prepathon-cv`).
+1. Upload this entire `helio-mirage` repository to the root of your Google Drive (`MyDrive/helio-mirage`).
 2. Download the `filament-segmentation-2026.zip` dataset and place it in the root of your Google Drive (`MyDrive/`).
 
 ### 2. Execution
-1. Double click **`colab_runner.ipynb`** in your Google Drive and open it in Google Colaboratory.
+1. Double click **`notebook.ipynb`** in your Google Drive and open it in Google Colaboratory.
 2. The notebook will automatically:
    - Mount your drive and install dependencies (like `pycocotools`).
    - Extract the dataset zip file directly into the Colab environment.

@@ -87,9 +87,18 @@ class MAGFiLODataset(Dataset):
             mask = np.zeros((1024, 1024), dtype=np.uint8)
             spine = np.zeros((1024, 1024), dtype=np.uint8)
         else:
-            image = cv2.imread(self.image_paths[idx], cv2.IMREAD_GRAYSCALE)
-            mask = cv2.imread(self.mask_paths[idx], cv2.IMREAD_GRAYSCALE) if len(self.mask_paths) > idx else np.zeros_like(image)
-            spine = cv2.imread(self.spine_paths[idx], cv2.IMREAD_GRAYSCALE) if len(self.spine_paths) > idx else np.zeros_like(image)
+            img_path = self.image_paths[idx]
+            image = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
+            
+            # Derive the corresponding mask and spine paths based on our generation script
+            base_name = os.path.splitext(os.path.basename(img_path))[0]
+            base_dir = os.path.dirname(os.path.dirname(img_path))
+            
+            mask_path = os.path.join(base_dir, f"{self.split}_masks", f"{base_name}.png")
+            spine_path = os.path.join(base_dir, f"{self.split}_spines", f"{base_name}.png")
+            
+            mask = cv2.imread(mask_path, cv2.IMREAD_GRAYSCALE) if os.path.exists(mask_path) else np.zeros_like(image)
+            spine = cv2.imread(spine_path, cv2.IMREAD_GRAYSCALE) if os.path.exists(spine_path) else np.zeros_like(image)
             
             # Handle potential None returns from cv2.imread (e.g. corrupted files)
             if image is None: image = np.zeros((1024, 1024), dtype=np.uint8)

@@ -1,0 +1,25 @@
+name: prepathon_cv
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pytorch=2.1.0
+  - torchvision=0.16.0
+  - pytorch-cuda=11.8
+  - numpy
+  - pandas
+  - matplotlib
+  - scikit-image
+  - scikit-learn
+  - opencv
+  - pip
+  - pip:
+    - hydra-core
+    - wandb
+    - transformers
+    - accelerate
+    - peft
+    - bitsandbytes

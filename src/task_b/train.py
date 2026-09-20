@@ -47,9 +47,11 @@ def main():
 
     print("Loading processor and base model...")
     processor = AutoProcessor.from_pretrained(args.model_id)
+    from transformers import BitsAndBytesConfig
+    quant_config = BitsAndBytesConfig(load_in_4bit=True)
     model = LlavaForConditionalGeneration.from_pretrained(
         args.model_id,
-        load_in_4bit=True,
+        quantization_config=quant_config,
         device_map="auto"
     )
     

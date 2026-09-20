@@ -81,7 +81,8 @@ def main():
     
     kwargs = {"device_map": "auto"}
     if args.use_4bit:
-        kwargs["load_in_4bit"] = True
+        from transformers import BitsAndBytesConfig
+        kwargs["quantization_config"] = BitsAndBytesConfig(load_in_4bit=True)
     else:
         kwargs["torch_dtype"] = torch.float16
         

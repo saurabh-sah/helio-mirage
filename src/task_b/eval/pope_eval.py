@@ -66,7 +66,7 @@ def evaluate_pope(model, processor, data_path, split):
 
 def main():
     parser = argparse.ArgumentParser(description="Evaluate on POPE benchmark")
-    parser.add_argument("--model_id", type=str, default="liuhaotian/llava-v1.5-7b")
+    parser.add_argument("--model_id", type=str, default="llava-hf/llava-1.5-7b-hf")
     parser.add_argument("--split", type=str, default="all", choices=["random", "popular", "adversarial", "all"])
     parser.add_argument("--use_4bit", action="store_true")
     parser.add_argument("--data_path", type=str, default="data/raw/POPE")

@@ -26,7 +26,7 @@ def format_data(example, processor):
 def main():
     parser = argparse.ArgumentParser(description="LoRA Fine-tuning for Task B")
     parser.add_argument("--config-name", type=str, default="lora_config.yaml")
-    parser.add_argument("--model_id", type=str, default="liuhaotian/llava-v1.5-7b")
+    parser.add_argument("--model_id", type=str, default="llava-hf/llava-1.5-7b-hf")
     parser.add_argument("--data_path", type=str, default="data/raw/llava_instruct")
     parser.add_argument("--output_dir", type=str, default="checkpoints")
     

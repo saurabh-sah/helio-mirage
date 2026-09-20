@@ -18,10 +18,11 @@ class MAGFiLODataset(Dataset):
         self.patch_size = patch_size
         self.augment = augment
         
-        # In a real scenario, this would glob the FITS/PNG images and their masks
-        self.image_paths = sorted(glob.glob(os.path.join(root_dir, split, 'images', '*.png')))
-        self.mask_paths = sorted(glob.glob(os.path.join(root_dir, split, 'masks', '*.png')))
-        self.spine_paths = sorted(glob.glob(os.path.join(root_dir, split, 'spines', '*.png')))
+        # Using glob with standard image extensions for the Kaggle structure
+        base_path = os.path.join(root_dir, 'MAGFiLO_1.0_Kaggle_2026', split)
+        self.image_paths = sorted(glob.glob(os.path.join(base_path, f'{split}_images', '*.*')))
+        self.mask_paths = sorted(glob.glob(os.path.join(base_path, f'{split}_masks', '*.*')))
+        self.spine_paths = sorted(glob.glob(os.path.join(base_path, f'{split}_spines', '*.*')))
         
         # Verify alignment
         if len(self.image_paths) != len(self.mask_paths):
@@ -80,13 +81,20 @@ class MAGFiLODataset(Dataset):
 
     def __getitem__(self, idx):
         # Load images
-        # Here we mock the loading for demonstration since data is missing
-        # image = cv2.imread(self.image_paths[idx], cv2.IMREAD_GRAYSCALE)
-        
-        # DUMMY DATA FOR NOW
-        image = np.zeros((1024, 1024), dtype=np.uint8)
-        mask = np.zeros((1024, 1024), dtype=np.uint8)
-        spine = np.zeros((1024, 1024), dtype=np.uint8)
+        if len(self.image_paths) == 0:
+            # Fallback for dummy testing if real dataset isn't fully extracted
+            image = np.zeros((1024, 1024), dtype=np.uint8)
+            mask = np.zeros((1024, 1024), dtype=np.uint8)
+            spine = np.zeros((1024, 1024), dtype=np.uint8)
+        else:
+            image = cv2.imread(self.image_paths[idx], cv2.IMREAD_GRAYSCALE)
+            mask = cv2.imread(self.mask_paths[idx], cv2.IMREAD_GRAYSCALE) if len(self.mask_paths) > idx else np.zeros_like(image)
+            spine = cv2.imread(self.spine_paths[idx], cv2.IMREAD_GRAYSCALE) if len(self.spine_paths) > idx else np.zeros_like(image)
+            
+            # Handle potential None returns from cv2.imread (e.g. corrupted files)
+            if image is None: image = np.zeros((1024, 1024), dtype=np.uint8)
+            if mask is None: mask = np.zeros_like(image)
+            if spine is None: spine = np.zeros_like(image)
         
         patch_img, patch_mask, patch_spine = self.extract_patch(image, mask, spine)
         

@@ -27,7 +27,7 @@ def process_split(data_dir, split_name):
     print(f"Found {len(img_ids)} images in {split_name}. Rasterizing masks and spines...")
     
     for img_id in tqdm(img_ids):
-        img_info = coco.loadImgs(img_id)[0]
+        img_info = coco.loadImgs([img_id])[0]
         h, w = img_info.get('height', 1024), img_info.get('width', 1024)
         
         # Initialize blank masks

@@ -68,12 +68,8 @@ def main():
     model.print_trainable_parameters()
     
     print("Loading contrastive dataset...")
-    # Attempt to load dataset. In reality, you'd provide the exact path/format.
-    # We gracefully exit or mock if the path doesn't exist so the pipeline doesn't crash unnecessarily.
     if not os.path.exists(args.data_path):
-        print(f"Warning: Dataset path {args.data_path} not found. Exiting gracefully to avoid crash.")
-        return
-        
+        raise FileNotFoundError(f"Dataset path {args.data_path} not found. Please ensure the instruction dataset is downloaded and the path is correct.")
     # Assuming the data is stored in Parquet or JSONL
     try:
         dataset = load_dataset("json", data_files=os.path.join(args.data_path, "*.json"))

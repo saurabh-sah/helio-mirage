@@ -15,9 +15,7 @@ def evaluate_pope(model, processor, data_path, split):
     image_dir = os.path.join(data_path, "val2014") # Default COCO val image dir
     
     if not os.path.exists(json_path):
-        print(f"Warning: Data {json_path} not found. Returning mock metrics.")
-        return 0.5, 0.5, 1.0
-        
+        raise FileNotFoundError(f"POPE dataset file {json_path} not found. Please ensure the dataset is downloaded and the path is correct.")
     with open(json_path, 'r') as f:
         data = [json.loads(line) for line in f]
         

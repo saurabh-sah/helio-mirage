@@ -50,7 +50,7 @@ def main():
     lr = 1e-4
     
     # Dataset and DataLoader
-    train_dataset = MAGFiLODataset(root_dir='data/processed', split='train', patch_size=256)
+    train_dataset = MAGFiLODataset(root_dir='data/raw/MAGFiLO', split='train', patch_size=256)
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=4)
     
     # Model

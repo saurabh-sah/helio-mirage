@@ -10,7 +10,7 @@
 - **Task A (Solar Physics):** Automated topological segmentation of Solar Filaments (and their delicate barb structures) in full-disk H$\alpha$ solar images.
 - **Task B (Generative AI):** Diagnosing and mitigating Object Hallucination in modern Vision-Language Models (VLMs) using logit-level contrastive decoding and LoRA fine-tuning.
 
-A highly detailed academic deep-dive explaining the exact mathematical formulations, architectural decisions, and physical constraints of our solution is available in **[`report.tex`](report.tex)** (and its compiled PDF).
+A highly detailed academic deep-dive explaining the exact mathematical formulations, architectural decisions, and physical constraints of our solution is available in **[`report.pdf`](report.pdf)**.
 
 ---
 
